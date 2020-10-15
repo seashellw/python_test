@@ -28,29 +28,20 @@ while j < docx_num:
 j = 0
 
 for i in tqdm(range(pdf.pageCount)):
+    pm = pdf[i].getPixmap(matrix=trans, alpha=False)
+    png_path = save_file_path + '/%s.png' % i
+    # 保存提取出的图片
+    pm.writePNG(png_path)
+    # 将图片插入docx文档的尾部,并设置宽度
+    doc.add_picture(png_path, width=shared.Cm(15))
 
-    if i < pdf.pageCount / 2:
-        pm = pdf[i].getPixmap(matrix=trans, alpha=False)
-        png_path = save_file_path + '/%s.png' % i
-        # 保存提取出的图片
-        pm.writePNG(png_path)
-        # 将图片插入docx文档的尾部,并设置宽度
-        doc.add_picture(png_path, width=shared.Cm(15))
-
-    elif i == pdf.pageCount / 2:
-        pm = pdf[i].getPixmap(matrix=trans, alpha=False)
-        png_path = save_file_path + '/%s.png' % i
-        pm.writePNG(png_path)
-        doc.add_picture(png_path, width=shared.Cm(15))
-        # 保存docx文件,参数为文件全名
-        doc.save(r'C:\Users\15839\Desktop\test1.docx')
+    if pont[j] == i:
+        j = j+1
+        doc.save('C:\\Users\\15839\\Desktop\\'+j+'.docx')
         doc = docx.Document()
 
-    else:
-        pm = pdf[i].getPixmap(matrix=trans, alpha=False)
-        png_path = save_file_path + '/%s.png' % i
-        pm.writePNG(png_path)
-        doc.add_picture(png_path, width=shared.Cm(15))
+
+j = j+1
 
 # 保存docx文件,参数为文件全名
-doc.save(r'C:\Users\15839\Desktop\test2.docx')
+doc.save('C:\\Users\\15839\\Desktop\\'+j+'.docx')
