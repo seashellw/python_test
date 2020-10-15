@@ -10,9 +10,9 @@ zoom_x = 1.0
 zoom_y = 1.0
 trans = fitz.Matrix(zoom_x, zoom_y).preRotate(rotate)
 # 原pdf文件全名
-open_file_path = r'C:\Users\15839\Desktop\原创力 C#网络应用编程 第3版_13619182_compressed.pdf'
+open_file_path = 'C:\\Users\\15839\\Desktop\\原创力 C#网络应用编程 第3版_13619182_compressed.pdf'
 # 图片存储目录
-save_file_path = r'C:\Users\15839\Desktop\新建文件夹'
+save_file_path = 'C:\\Users\\15839\\Desktop\\新建文件夹'
 pdf = fitz.open(open_file_path)
 # 在内存中创建一个新docx文档对象
 doc = docx.Document()
@@ -24,6 +24,8 @@ pont = []
 while j < docx_num:
     pont.append(len(range(pdf.pageCount))/docx_num*j)
     j = j+1
+
+print(pont)
 
 j = 0
 
@@ -37,11 +39,11 @@ for i in tqdm(range(pdf.pageCount)):
 
     if pont[j] == i:
         j = j+1
-        doc.save('C:\\Users\\15839\\Desktop\\'+j+'.docx')
+        doc.save('C:\\Users\\15839\\Desktop\\' + str(j) + '.docx')
         doc = docx.Document()
 
 
 j = j+1
 
 # 保存docx文件,参数为文件全名
-doc.save('C:\\Users\\15839\\Desktop\\'+j+'.docx')
+doc.save('C:\\Users\\15839\\Desktop\\'+str(j)+'.docx')
