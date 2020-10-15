@@ -17,12 +17,17 @@ pdf = fitz.open(open_file_path)
 # 在内存中创建一个新docx文档对象
 doc = docx.Document()
 
-docx_num=4
+docx_num = 4
+j = 1
+pont = []
+
+while j < docx_num:
+    pont.append(len(range(pdf.pageCount))/docx_num*j)
+    j = j+1
+
+j = 0
 
 for i in tqdm(range(pdf.pageCount)):
-
-
-
 
     if i < pdf.pageCount / 2:
         pm = pdf[i].getPixmap(matrix=trans, alpha=False)
